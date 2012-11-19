@@ -1,2 +1,23 @@
 #!/usr/bin/env node
-require('grunt').npmTasks('mason').cli();
+
+var program = require("commander"),
+    mason = require("../lib/mason");
+
+program.command('install')
+       .usage('[options] <dir ...>')
+       .description('install one or more components')
+       .option('-d, --dest <path>', 'components destination', 'components')
+       .option('-f, --flatten', 'flatten destination file paths')
+       .action(function() {
+         var args = Array.prototype.slice.call(arguments),
+             cmd = args.pop();
+         if (args.length < 1) {
+           console.error("Must specify at least one directory".red);
+           process.exit(1);
+         }
+         console.log(cmd.flatten);
+         console.log(cmd.dest);
+         mason.install(args, cmd.dest || 'components', cmd); 
+       });
+
+program.parse(process.argv);
