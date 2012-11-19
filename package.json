@@ -1,0 +1,37 @@
+{
+  "name": "mason",
+  "version": "0.0.0",
+  "description": "the simplest possible thing for modular javascript projects",
+  "author": {
+    "name": "Aaron Hamid (@ahamid)",
+    "email": "aaron@incsw.com",
+    "url": "http://incsw.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ahamid/mason.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahamid/mason/issues"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/ahamie/mason/blob/master/LICENSE"
+  },
+  "bin": "bin/mason",
+  "files": [
+    "index.js",
+    "bin",
+    "lib",
+    "tasks"
+  ],
+  "dependencies": [
+    "commander",
+    "fstream-npm",
+    "mkdirp",
+    "colors"
+  ]
+}
