@@ -7,10 +7,10 @@ module.exports = function(grunt) {
   // TASKS
   // ==========================================================================
 
-  grunt.registerTask('mason', 'the simplest possible thing for modular javascript projects', function(cmd) {
+  grunt.registerMultiTask('mason', 'the simplest possible thing for modular javascript projects', function(cmd) {
     var command, paths, config;
 
-    this.requiresConfig('mason.paths');
+    this.requiresConfig('mason.' + this.target + '.paths');
 
     if (!cmd) cmd = 'install';
 
@@ -20,12 +20,12 @@ module.exports = function(grunt) {
       return false;
     }
 
-    config = grunt.config.get('mason') || {};
+    config = this.data || {};
     paths = config.paths;
     if (typeof paths === 'string') {
       paths = [ paths ];
     }
     var done = this.async();
-    command(paths, config.dest || 'components', config, done);
+    command(paths, config.dest || 'components', config, done, grunt.fail.warn);
   });
 };
