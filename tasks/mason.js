@@ -10,7 +10,13 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('mason', 'the simplest possible thing for modular javascript projects', function(cmd) {
     var command, paths, config;
 
-    this.requiresConfig('mason.' + this.target + '.paths');
+    // requiresConfig is just broken.
+    // namespace 'get' stops as soon as it hits a non-object, returning invalid, but non-undefined result
+    //this.requiresConfig('mason.' + this.target + '.paths');
+    config = this.data || {};
+    if (!config.paths) {
+      throw grunt.task.taskError('Required config property "paths" missing.');
+    }
 
     if (!cmd) cmd = 'install';
 
@@ -20,7 +26,6 @@ module.exports = function(grunt) {
       return false;
     }
 
-    config = this.data || {};
     paths = config.paths;
     if (typeof paths === 'string') {
       paths = [ paths ];
